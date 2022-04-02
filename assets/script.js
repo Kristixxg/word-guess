@@ -1,9 +1,33 @@
-var words = ["github", "bootcamp", "Jerome"];
+var words = ["github", "bootcamp", "jerome"];
 var startBtn = document.getElementById("start");
 var countEl = document.getElementById("counter");
 var winsCount = document.getElementById("win-count");
 var lossesCount = document.getElementById("loss-count");
 var messageEl = document.getElementById("message");
+
+
+
+//key down 
+
+function keydown(event) {
+    var keyPress = event.key;
+    var lowercaseKey = keyPress.toLowerCase();
+}
+// if pressed key matchs word[i]
+//the blank appendChild(keyPress);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //get histories from loal storage - complete
@@ -61,15 +85,16 @@ function displayMsg() {
 var wins = 0;
 var losses = 0;
 
-if () {
-    wins++;
-} else if {
-    losses++;
-}
+// if () {
+//     wins++;
+// } else if {
+//     losses++;
+// }
 
 //local storage
 localStorage.setItem("wins", wins);
 localStorage.setItem("losses", losses);
+// renderLastScore();
 
 
 
