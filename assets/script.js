@@ -7,7 +7,7 @@ var wordBox = document.querySelector("#word-box");
 var resetBtn =  document.querySelector(".reset-score");
 
 
-var words = ["github", "bootcamp", "jerome"];
+var words = ["github", "bootcamp", "jerome", "javascipt", "coding"];
 var chosenWord;
 var characters;
 var numBlank;
@@ -49,6 +49,7 @@ function endGame() {
         wins++;
         winsCount.textContent = wins;
         clearInterval(interval);
+        displayWinMsg();
     }
 }
 
@@ -88,17 +89,21 @@ function timer10secs() {
         countEl.textContent = timerLeft;
 
         if (timerLeft === 0) {
-            losses++;
+        losses++;
         lossesCount.textContent = losses;
         clearInterval(interval);
-        displayMsg();
+        displayLostMsg();
         }
 
     },1000);
 };
 
-function displayMsg() {
+function displayLostMsg() {
     messageEl.textContent= "You lost!";
+}
+
+function displayWinMsg() {
+    messageEl.textContent= "You won!";
 }
 
 

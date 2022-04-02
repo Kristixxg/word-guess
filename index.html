@@ -8,30 +8,32 @@
     <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
-    <div class="header">
-        <h1>Guess the Word!</h1>
-        <button id="start">Start</button>
-    </div>
-    
-    <div class="container">
-        <div class="left-div">
-            <div id="word-box">
-                Click Start to Play!
+    <div class="outter-container">
+        <div class="header">
+            <h1>Guess the Word!</h1>
+            <button id="start">Start</button>
+        </div>
+        
+        <div class="container">
+            <div class="left-div">
+                <div id="word-box">
+                    Click Start to Play!
+                </div>
+
+                <div class="timer">
+                    <p>Seconds remaining: <span id="counter">10</span></p>
+                </div>
+
+                <div id="message"></div>
             </div>
 
-            <div id="message"></div>
-        </div>
-
-        <div class="right-div">
-            <div id="score">
-                <p>Wins: <span id="win-count">0</span></p>
-                <p>Losses: <span id="loss-count">0</span></p>
+            <div class="right-div">
+                <div id="score">
+                    <p>Wins: <span id="win-count">0</span></p>
+                    <p>Losses: <span id="loss-count">0</span></p>
+                </div>
+                <button class="reset-score">Reset Score</button>
             </div>
-            <button class="reset-score">Reset Score</button>
-        </div>
-
-        <div class="timer">
-            <p>Seconds remaining: <span id="counter">10</span></p>
         </div>
     </div>
 
