@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.header {
+    text-align: center;
+    background-color: rgb(2, 2, 171);
+    color: white;
+    font-size: 50px;
+   
+}
+
+#start {
+    background-color: orange;
+    color: white;
+    padding: 5px;
+}
