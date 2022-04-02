@@ -7,7 +7,7 @@ var wordBox = document.querySelector("#word-box");
 var resetBtn =  document.querySelector(".reset-score");
 
 
-var words = ["github", "bootcamp", "jerome", "javascipt", "coding"];
+var words = ["github", "bootcamp", "jerome", "javascript", "coding"];
 var chosenWord;
 var characters;
 var numBlank;
@@ -15,6 +15,52 @@ var blankLetters;
 var wins = 0;
 var losses = 0;
 var interval;
+
+renderLastScore();
+
+function renderLastScore() {
+    wins = localStorage.getItem("wins");
+    losses = localStorage.getItem("losses");
+
+    if (wins === 0 && losses === 0) {
+        return;
+    }
+
+    winsCount.textContent = wins;
+    lossesCount.textContent = losses;
+}
+
+//click start game, start counting down - complete
+startBtn.addEventListener("click", function(event) {
+    timer10secs();
+     showBlank();
+
+   
+
+
+ });
+ 
+ function timer10secs() { 
+     
+     var timerLeft = 10;
+ 
+     interval = setInterval(function() {
+ 
+         timerLeft--;
+         countEl.textContent = timerLeft;
+         
+ 
+         if (timerLeft === 0) {
+         losses++;
+         lossesCount.textContent = losses;
+         clearInterval(interval);
+         localStorage.setItem("losses", losses);
+         renderLastScore();
+         displayLostMsg();
+         }
+ 
+     },1000);
+ };
 
 function showBlank() {
  chosenWord = words[Math.floor(Math.random() * words.length)];
@@ -30,6 +76,19 @@ function showBlank() {
 
 //key down 
 
+
+
+function endGame() {
+    if (chosenWord === blankLetters.join("")) {
+        wins++;
+        localStorage.setItem("wins", wins);
+        
+        winsCount.textContent = wins;
+        clearInterval(interval);
+        displayWinMsg();
+    }
+}
+
 document.addEventListener("keydown", function(event) {
     var keyPress = event.key;
     var lowerKeyPress = keyPress.toLowerCase();
@@ -42,61 +101,8 @@ document.addEventListener("keydown", function(event) {
     }
 
     endGame();
+
 })
-
-function endGame() {
-    if (chosenWord === blankLetters.join("")) {
-        wins++;
-        winsCount.textContent = wins;
-        clearInterval(interval);
-        displayWinMsg();
-    }
-}
-
-
-//get histories from loal storage - complete
-
-renderLastScore();
-
-function renderLastScore() {
-    var wins = localStorage.getItem("wins");
-    var losses = localStorage.getItem("losses");
-
-    if (wins === 0 || losses === 0) {
-        return;
-    }
-
-    winsCount.textContent = wins;
-    lossesCount.textContent = losses;
-}
-
-
-
-
-//click start game, start counting down - complete
-startBtn.addEventListener("click", function(event) {
-   timer10secs();
-    showBlank();
-});
-
-function timer10secs() { 
-    
-    var timerLeft = 10;
-
-    interval = setInterval(function() {
-
-        timerLeft--;
-        countEl.textContent = timerLeft;
-
-        if (timerLeft === 0) {
-        losses++;
-        lossesCount.textContent = losses;
-        clearInterval(interval);
-        displayLostMsg();
-        }
-
-    },1000);
-};
 
 function displayLostMsg() {
     messageEl.textContent= "You lost!";
@@ -108,19 +114,22 @@ function displayWinMsg() {
 
 
 resetBtn.addEventListener("click", function(){
+    
+    localStorage.setItem("wins", "0")
+    localStorage.setItem("losses", "0")
     winsCount.textContent = 0;
     lossesCount.textContent = 0;
 });
 
-
-
-
-
-
 //local storage
-localStorage.setItem("wins", wins);
-localStorage.setItem("losses", losses);
-renderLastScore();
+
+
+// renderLastScore();
+
+
+
+
+
 
 
 
