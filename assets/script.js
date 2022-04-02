@@ -1,33 +1,56 @@
-var words = ["github", "bootcamp", "jerome"];
 var startBtn = document.getElementById("start");
 var countEl = document.getElementById("counter");
 var winsCount = document.getElementById("win-count");
 var lossesCount = document.getElementById("loss-count");
 var messageEl = document.getElementById("message");
+var wordBox = document.querySelector("#word-box");
+var resetBtn =  document.querySelector(".reset-score");
 
+
+var words = ["github", "bootcamp", "jerome"];
+var chosenWord;
+var characters;
+var numBlank;
+var blankLetters;
+var wins = 0;
+var losses = 0;
+var interval;
+
+function showBlank() {
+ chosenWord = words[Math.floor(Math.random() * words.length)];
+ characters = chosenWord.split("");
+ numBlank = characters.length;
+    blankLetters =[];
+  for (let i=0; i < numBlank; i++) {
+    blankLetters.push("_") 
+  }
+  wordBox.textContent = blankLetters.join(" ")
+}   
 
 
 //key down 
 
-function keydown(event) {
+document.addEventListener("keydown", function(event) {
     var keyPress = event.key;
-    var lowercaseKey = keyPress.toLowerCase();
+    var lowerKeyPress = keyPress.toLowerCase();
+
+    for (i=0; i<numBlank; i++) {
+        if(lowerKeyPress === characters[i]) {
+            blankLetters[i] = lowerKeyPress;
+            wordBox.textContent = blankLetters.join(" ");
+        }
+    }
+
+    endGame();
+})
+
+function endGame() {
+    if (chosenWord === blankLetters.join("")) {
+        wins++;
+        winsCount.textContent = wins;
+        clearInterval(interval);
+    }
 }
-// if pressed key matchs word[i]
-//the blank appendChild(keyPress);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //get histories from loal storage - complete
@@ -52,19 +75,21 @@ function renderLastScore() {
 //click start game, start counting down - complete
 startBtn.addEventListener("click", function(event) {
    timer10secs();
-
+    showBlank();
 });
 
 function timer10secs() { 
-
+    
     var timerLeft = 10;
 
-    var interval = setInterval(function() {
+    interval = setInterval(function() {
 
         timerLeft--;
         countEl.textContent = timerLeft;
 
         if (timerLeft === 0) {
+            losses++;
+        lossesCount.textContent = losses;
         clearInterval(interval);
         displayMsg();
         }
@@ -77,24 +102,20 @@ function displayMsg() {
 }
 
 
+resetBtn.addEventListener("click", function(){
+    winsCount.textContent = 0;
+    lossesCount.textContent = 0;
+});
 
 
 
-//tracking results
 
-var wins = 0;
-var losses = 0;
 
-// if () {
-//     wins++;
-// } else if {
-//     losses++;
-// }
 
 //local storage
 localStorage.setItem("wins", wins);
 localStorage.setItem("losses", losses);
-// renderLastScore();
+renderLastScore();
 
 
 
